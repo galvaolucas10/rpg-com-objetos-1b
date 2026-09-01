@@ -1,8 +1,18 @@
 class Personagem {
-    constructor(nome, vida, ataque) {
-        this.nome = nome
-        this.vida = vida
-        this.ataque = ataque
+    constructor(nome, vida, ataque, defesa) {
+        this.nome = nome,
+        this.vida = vida,
+        this.vidaMax = vida,
+        this.ataque = ataque,
+        this.defesa = defesa
+    }
+
+    curar(quantidade){
+        this.vida = this.vida + quantidade
+
+        if(this.vida > this.vidaMax){
+            this.vida = this.vidaMax
+        }
     }
 
     causaDano(personagem) {
@@ -10,31 +20,40 @@ class Personagem {
     }
 
     recebeDano(quantidade) {
-        this.vida = this.vida - quantidade
+        let dano = quantidade - this.defesa
 
-        if (this.vida <= 0) {
+    if(quantidade < this.defesa) {
+        dano = 0
+    }
+
+    this.vida = this.vida - dano
+
+    if (this.vida <= 0) {
             this.vida = "morreu"
-        }
+    }        
     }
 
     estaVivo(){
         return this.vida > 0
     }
-    mostrarStatus(){
-        console.log(this.nome + " | Vida: " + this.vida)
+
+    mostraStatus(){
+        console.log(this.nome + " | vida: " + this.vida)
     }
 }
 
-const druida = new Personagem("Obin", 55, 35)
-const guerreiro = new Personagem("Thorin", 60, 20)
-const mago = new Personagem("Gandalfe", 60, 35)
-const arqueiro = new Personagem("Legolas", 80, 25)
-const ladrao = new Personagem("Sombra", 50, 40)
-const paladino = new Personagem("Uther", 90, 15)
-const necromante = new Personagem("Malakor", 55, 35)
+class Guerreiro extends Personagem {
+    golpePesado(personagem){
+        personagem.recebeDano(this.ataque * 2)
+    }
+}
 
-mago.causaDano(arqueiro)
-mago.causaDano(arqueiro)
-druida.causaDano(arqueiro)
-arqueiro.mostrarStatus()
-console.log(arqueiro.estaVivo())
+const druida = new Personagem("Obin", 150, 15)
+const guerreiro = new Guerreiro("Thorin", 60, 20)
+const mago = new Personagem("Gandalfe", 60, 35)
+const arqueiro = new Personagem("Legolas", 80, 25, 12)
+
+guerreiro.golpePesado(arqueiro)
+
+arqueiro.mostraStatus()
+
