@@ -43,17 +43,26 @@ class Personagem {
 }
 
 class Guerreiro extends Personagem {
+    constructor(nome){
+        super(nome, 70, 35, 8)
+    }
     golpePesado(personagem){
         personagem.recebeDano(this.ataque * 2)
     }
 }
 
 const druida = new Personagem("Obin", 150, 15)
-const guerreiro = new Guerreiro("Thorin", 60, 20)
+const guerreiro = new Guerreiro("Thorin")
 const mago = new Personagem("Gandalfe", 60, 35)
 const arqueiro = new Personagem("Legolas", 80, 25, 12)
 
-guerreiro.golpePesado(arqueiro)
-
-arqueiro.mostraStatus()
+const personagens = [
+    druida,
+    guerreiro,
+    mago,
+    arqueiro
+]
+personagens.forEach(function(personagem){
+personagem.mostraStatus()
+})
 
