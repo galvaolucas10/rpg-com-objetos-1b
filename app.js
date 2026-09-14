@@ -62,7 +62,19 @@ const personagens = [
     mago,
     arqueiro
 ]
+
 personagens.forEach(function(personagem){
 personagem.mostraStatus()
 })
 
+let turno = 1
+let jogadorAtual = 0
+
+function proximoTurno(){
+    turno = turno + 1
+    jogadorAtual = jogadorAtual === 0 ? 1 : 0
+}
+proximoTurno()
+proximoTurno()
+console.log(turno)
+console.log(jogadorAtual)
