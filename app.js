@@ -53,7 +53,7 @@ class Guerreiro extends Personagem {
 
 const druida = new Personagem("Obin", 150, 15)
 const guerreiro = new Guerreiro("Thorin")
-const mago = new Personagem("Gandalfe", 60, 35)
+const mago = new Personagem("Gandalfe", 60, 35, 10)
 const arqueiro = new Personagem("Legolas", 80, 25, 12)
 
 const personagens = [
@@ -81,7 +81,22 @@ vidaGuerreiro.innerText = guerreiro.vida
 const ataqueGuerreiro = document.getElementById("ataque-guerreiro")
 ataqueGuerreiro.innerText = guerreiro.ataque
 
+const vidaMago = document.getElementById("vida-mago")
+vidaMago.innerText = mago.vida
+
 const guerreiroAtacar = document.getElementById("guerreiro-atacar")
 guerreiroAtacar.addEventListener("click", () => {
-    alert("botão pressionado")
+    guerreiro.causaDano(mago)
+    vidaMago.innerText = mago.vida
+})
+
+
+
+const ataqueMago = document.getElementById("ataque-mago")
+ataqueMago.innerText = mago.ataque
+
+const magoAtacar = document.getElementById("mago-atacar")
+magoAtacar.addEventListener("click", () => {
+    mago.causaDano(guerreiro)
+    vidaGuerreiro.innerText = guerreiro.vida
 })
